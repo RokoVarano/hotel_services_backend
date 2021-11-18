@@ -49,7 +49,7 @@ Header:
 
 ```json
 {
-    "Content-type":  "Application/JSON"
+    "Content-type":  "application/json"
 }
 ```
 Body (example):
@@ -164,7 +164,7 @@ Body (example):
 Header:
 ```json
 {
-    "Content-Type": Application/JSON
+    "Content-Type": "application/json"
 }
 ```
 
