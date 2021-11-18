@@ -32,13 +32,15 @@ Body (example):
             "name": "pool time",
             "description": "bring your own towel"
             "time": 1.0,
-            "price": USD 10
-            "image_url":  "https://picsum.photos/200/300"
+            "price": 10.0,
+            "image_url":  "https://picsum.photos/200/300",
             "city": "San Francisco"
         }
     ]
 }
 ```
+
+**Prices are in USD**
 
 ## Create a new service
 ### Endpoint: POST /api/v1/services
