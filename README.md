@@ -14,10 +14,57 @@ Additional description about the project and its features.
 - React
 - Redux
 
-## Live Demo
+# API Documentation
 
-Coming soon
+## List all services
 
+### Endpoint GET api/v1/services
+#### Response
+Successful:
+Code: 200
+Body (example):
+
+```json
+{
+    "services": [
+        {
+            "id": 1,
+            "name": "pool time",
+            "description": "bring your own towel"
+            "time": 1.0,
+            "price": USD 10
+            "image_url":  "https://picsum.photos/200/300"
+            "city": "San Francisco"
+        }
+    ]
+}
+```
+
+## L
+
+## List a given user's reservations
+### Endpoint GET api/v1/user/:id/reservations
+
+```json
+{
+    "user_id": 1,
+    "reservations": [
+        {
+            "id": 1,
+            "date": {
+                "day": 14,
+                "month": 4,
+                "year": 2021,
+                "start": "13:00",
+                "end": "14:00"
+            }
+            "service_id": 1,
+        }
+    ]
+}
+```
+
+##
 
 ## Getting Started
 
