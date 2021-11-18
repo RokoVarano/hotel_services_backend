@@ -199,6 +199,26 @@ Code: 500
 }
 ```
 
+## Cancel a reservation
+### Endpoint DELETE api/reservation/:id
+#### Response
+Successful:
+Code: 202
+Body (example):
+```json
+{
+    "message": "Your reservation has been canceled"
+}
+```
+Failure:
+Code: 500
+Body (example):
+```json
+{
+    "message": "Your reservation couldn't be canceled"
+}
+```
+
 ## Create User
 ### Endpoint: POST api/v1/users/
 
@@ -238,22 +258,7 @@ Body (example):
 **The error message will return the error cause.**
 
 ## Log In
-### Endpoint GET /api/v1/users
-
-#### Request
-Header:
-```json
-{
-    "Content-Type": "application/json"
-}
-```
-Body (example):
-```json
-{
-    "name": "User1"
-}
-```
-
+### Endpoint GET /api/v1/users?name=:name
 #### Response:
 Successful:
 Code: 202
