@@ -31,11 +31,9 @@ Body (example):
         {
             "id": 1,
             "name": "pool time",
-            "description": "bring your own towel"
-            "time": 1.0,
+            "description": "bring your own towel",
             "price": 10.0,
-            "image_url":  "https://picsum.photos/200/300",
-            "city": "San Francisco"
+            "image_url":  "https://picsum.photos/200/300"
         }
     ]
 }
@@ -58,10 +56,8 @@ Body (example):
 {
     "name": "pool time",
     "description": "bring your own towell",
-    "time": 1.0,
     "price": 10.0,
-    "image_url": "https://picsum.photos/200/300",
-    "city": "Los Angeles"
+    "image_url": "https://picsum.photos/200/300"
 }
 ```
 **Prices are in USD**
@@ -121,46 +117,23 @@ Body (example):
     "user_id": 1,
     "reservations": [
         {
-            "id": 1,
+            "reservation_id": 1,
             "date": {
                 "day": 14,
                 "month": 4,
-                "year": 2021,
-                "start": "13:00",
-                "end": "14:00"
+                "year": 2021
             }
-            "service_id": 1,
-        }
-    ]
-}
-```
-
-## Get current reservations for a given service by service name
-### Endpoint GET /api/v1/service/:name/reservations
-#### Response
-Successful:
-Code: 200
-Body (example):
-
-```json
-{
-    "reservations": [
-        {
-            "date": {
-                "day": 14,
-                "month": 4,
-                "year": 2021,
-                "start": "13:00",
-                "end": "14:00"
-            },
-            "service_id": 1
+            "service_name": "Pool time",
+            "service_description": "Bring some of your friends",
+            "image_url": "https://picsum.photos/200/300",
+            "city": "Los Angeles"
         }
     ]
 }
 ```
 
 ## Book a given service
-### Endpoint: POST /api/v1/user/:id/reservations
+### Endpoint: POST /api/v1/user/:user_id/services/:service_id/reservation
 #### Request
 Header:
 ```json
@@ -172,14 +145,12 @@ Header:
 Body (example):
 ```json
 {
-    "service_id": 1,
     "date": {
         "day": 14,
         "month": 4,
-        "year": 2021,
-        "start": "13:00",
-        "end": "14:00"
-    }
+        "year": 2021
+    },
+    "city": "Chicago"
 }
 ```
 
@@ -244,7 +215,8 @@ Code: 201
 Body (example):
 ```json
 {
-    "message": "User was successfully created"
+    "message": "User was successfully created",
+    "user_id": 42
 }
 ```
 
