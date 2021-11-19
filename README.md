@@ -55,7 +55,7 @@ Body (example):
 ```json
 {
     "name": "pool time",
-    "description": "bring your own towell",
+    "description": "bring your own towel",
     "price": 1000,
     "image_url": "https://picsum.photos/200/300"
 }
