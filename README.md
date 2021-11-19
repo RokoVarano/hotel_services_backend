@@ -32,14 +32,14 @@ Body (example):
             "id": 1,
             "name": "pool time",
             "description": "bring your own towel",
-            "price": 10.0,
+            "price": 1000,
             "image_url":  "https://picsum.photos/200/300"
         }
     ]
 }
 ```
 
-**Prices are in USD**
+**Prices are in USD cents**
 
 ## Create a new service
 ### Endpoint: POST /api/v1/services
@@ -56,11 +56,11 @@ Body (example):
 {
     "name": "pool time",
     "description": "bring your own towell",
-    "price": 10.0,
+    "price": 1000,
     "image_url": "https://picsum.photos/200/300"
 }
 ```
-**Prices are in USD**
+**Prices are in USD cents**
 
 #### Response
 Successful:
