@@ -7,7 +7,7 @@ class Service < ApplicationRecord
   has_many :reservations, dependent: :destroy
   has_many :users, through: :reservations
 
-  def as_json(options={})
+  def as_json(_options = {})
     {
       id: id,
       name: name,
