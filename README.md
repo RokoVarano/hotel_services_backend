@@ -172,7 +172,7 @@ Code: 500
 ```
 
 ## Cancel a reservation
-### Endpoint DELETE api/reservation/:id
+### Endpoint DELETE api/v1/reservation/:id
 #### Response
 Successful:
 Code: 202
