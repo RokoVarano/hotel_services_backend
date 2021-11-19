@@ -4,7 +4,7 @@ class Service < ApplicationRecord
   validates :price, presence: true
   validates :image_url, presence: true, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
   has_many :users, through: :reservations
 
   def as_json(options={})
