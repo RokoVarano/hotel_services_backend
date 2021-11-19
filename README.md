@@ -294,6 +294,15 @@ Body:
 - Twitter: [@LucasFerrariSo1](https://twitter.com/LucasFerrariSo1)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/lucas-mauricio-ferrari-soto-472a3515a/)
 
+👤 **Rodrigo Ibaceta**
+- GitHub: [@RokoVarano](https://github.com/RokoVarano)
+- Twitter: [@RodrigoIbacet11](https://twitter.com/RodrigoIbacet11)
+- LinkedIn: [rodrigo-ibaceta](https://www.linkedin.com/in/rodrigo-ibaceta/)
+
+👤 **Andres Felipe Castañeda Ramos**
+- Github: [@afcastaneda223](https://github.com/afcastaneda223)
+- Twitter: [@afcastaneda](https://twitter.com/afcastaneda)
+- Linkedin: [Andres Felipe Castañeda](https://www.linkedin.com/in/andcast)
 
 ## 🤝 Contributing
 
