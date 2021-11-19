@@ -15,6 +15,11 @@ ActiveRecord::Schema.define(version: 2021_11_19_155515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
@@ -22,6 +27,12 @@ ActiveRecord::Schema.define(version: 2021_11_19_155515) do
     t.integer "price", null: false
     t.string "city", null: false
     t.string "image_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
