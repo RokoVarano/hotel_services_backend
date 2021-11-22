@@ -14,7 +14,7 @@ class Api::V1::ServicesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @service = Service.find(params[:id])
     if @service.destroy
       render json: { message: 'Service has been deleted' }.to_json
@@ -24,11 +24,6 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   private
-
-  def set_service
-    @service = Service.find(params[:id])
-  end
-
   def service_params
     params.require(:service).permit(:name, :description, :price, :image_url)
   end
