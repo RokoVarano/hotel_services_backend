@@ -42,4 +42,12 @@ class Api::V1::ReservationsController < ApplicationController
       ]
     }.to_json
   end
+
+  def create
+    render json: { message: 'Reservation has been created' }.to_json
+  end
+
+  def destroy
+    render json: { message: 'Your reservation has been canceled' }.to_json
+  end
 end
