@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1, defaults: { format: 'json' } do
       resources :services, only: %i[index create destroy]
 
       get 'users/:id/reservations', to: 'reservations#index'
