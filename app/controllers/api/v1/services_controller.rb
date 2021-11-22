@@ -1,7 +1,6 @@
 class Api::V1::ServicesController < ApplicationController
-
   def index
-    services = Service.all.order("created_at DESC")
+    services = Service.all.order('created_at DESC')
     render json: { services: services }.to_json
   end
 
