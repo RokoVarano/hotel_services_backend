@@ -1,25 +1,25 @@
 class Api::V1::ServicesController < ApplicationController
   def index
     services = Service.all.order('created_at DESC')
-    render json: { services: services }.to_json
+    render status: 200, json: { services: services }.to_json
   end
 
   def create
     @service = Service.new(service_params)
 
     if @service.save
-      render json: { message: 'Service has been created' }.to_json
+      render status: 201, json: { message: 'Service has been created' }.to_json
     else
-      render json: { message: 'Service was not created' }.to_json
+      render status: 500, json: { message: 'Service creation has failed' }.to_json
     end
   end
 
   def destroy
     @service = Service.find(params[:id])
     if @service.destroy
-      render json: { message: 'Service has been deleted' }.to_json
+      render status: 202, json: { message: 'Service has been deleted' }.to_json
     else
-      render json: { message: 'No action was taken' }.to_json
+      render status: 500, json: { message: 'No action was taken' }.to_json
     end
   end
 
