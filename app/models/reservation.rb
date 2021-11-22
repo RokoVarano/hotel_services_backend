@@ -5,7 +5,7 @@ class Reservation < ApplicationRecord
   validates :date, presence: true
   validates :city, presence: true
 
-  def as_json(options={})
+  def as_json(_options = {})
     {
       id: id,
       user_id: user_id,
@@ -14,5 +14,4 @@ class Reservation < ApplicationRecord
       city: city
     }
   end
-
 end
