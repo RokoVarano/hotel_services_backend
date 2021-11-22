@@ -83,7 +83,7 @@ Body (example):
 ```
 
 ## Delete a given service
-### Endpoint: DELETE /api/v1/service/:id
+### Endpoint: DELETE /api/v1/services/:id
 #### Response
 Success:
 Code: 202
