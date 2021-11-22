@@ -24,7 +24,7 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   private
-  
+
   def service_params
     params.require(:service).permit(:name, :description, :price, :image_url)
   end
