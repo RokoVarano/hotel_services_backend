@@ -1,5 +1,6 @@
 class Reservation < ApplicationRecord
   belongs_to :user
+  belongs_to :service
 
   validates :date, presence: true
   validates :city, presence: true
@@ -13,4 +14,5 @@ class Reservation < ApplicationRecord
       city: city
     }
   end
+
 end

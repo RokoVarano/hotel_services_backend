@@ -4,10 +4,4 @@ class User < ApplicationRecord
 
   has_many :reservations, dependent: :destroy
   has_many :services, through: :reservations
-
-  
-
-  def user_exists?(user_name)
-    User.exists?(name: user_name)
-  end
 end
