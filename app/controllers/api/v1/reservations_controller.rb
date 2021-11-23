@@ -4,9 +4,9 @@ class Api::V1::ReservationsController < ApplicationController
     reservations = user.reservations
 
     render json: {
-             user_id: user.id,
-             reservations: reservations
-           }.to_json, status: :ok
+      user_id: user.id,
+      reservations: reservations
+    }.to_json, status: :ok
   end
 
   def create
@@ -36,7 +36,7 @@ class Api::V1::ReservationsController < ApplicationController
 
     if reservation
       reservation.destroy
-      render json: { message: 'Your reservation has been canceled'}.to_json,
+      render json: { message: 'Your reservation has been canceled' }.to_json,
              status: :accepted
     else
       render json: { errors: ['Not a current reservation'] }.to_json,
@@ -48,11 +48,15 @@ class Api::V1::ReservationsController < ApplicationController
 
   def date_from_params
     date_hash = params.require(:reservation)
-                  .permit(date: %i[day month year])['date']
+      .permit(date: %i[day month year])['date']
     day = date_hash['day']
     month = date_hash['month']
     year = date_hash['year']
-    Date.parse("#{day}-#{month}-#{year}") rescue nil
+    begin
+      Date.parse("#{day}-#{month}-#{year}")
+    rescue StandardError
+      nil
+    end
   end
 
   def city_param
