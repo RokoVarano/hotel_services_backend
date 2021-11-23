@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :reservations, only: [:destroy]
 
       resources :users, only: [:create]
-      get 'users', to: 'users#show_by_name'
+      get 'users', to: 'users#log_in'
     end
   end
 end
