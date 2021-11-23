@@ -78,7 +78,7 @@ Code: 500
 Body (example):
 ```json
 {
-    "message": "Service creation has failed"
+    "errors": ["Service creation has failed"]
 }
 ```
 
@@ -101,7 +101,7 @@ Body (example):
 
 ```json
 {
-    "message": "Service removal has failed"
+    "errors": ["Service removal has failed"]
 }
 ```
 
@@ -167,7 +167,7 @@ Failure:
 Code: 500
 ```json
 {
-    "message": "Reservation creation has failed"
+    "errors": ["Reservation creation has failed"]
 }
 ```
 
@@ -225,7 +225,7 @@ Code: 500
 Body (example):
 ```json
 {
-    "error": "Username already taken"
+    "errors": ["Username already taken"]
 }
 ```
 **The error message will return the error cause.**
@@ -248,7 +248,7 @@ Code: 401
 Body:
 ```json
 {
-    "error": "User doesn't exist"
+    "errors": ["User doesn't exist"]
 }
 ```
 **The error message will return the error cause.**
