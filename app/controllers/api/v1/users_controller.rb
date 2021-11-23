@@ -14,7 +14,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    p params
     new_user = User.new(new_user_params)
     if new_user.save
       render json: {
@@ -22,6 +21,11 @@ class Api::V1::UsersController < ApplicationController
                user_id: new_user.id
              }.to_json,
              status: :created
+    else
+      render json: {
+               error: new_user.errors.full_messages[0]
+             }.to_json,
+             status: :conflict
     end
   end
 

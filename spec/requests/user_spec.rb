@@ -28,10 +28,9 @@ RSpec.describe 'User endpoints tests', type: :request do
 
     it 'Succeeds for a new user name' do
       headers = {
-        'HTTP_ACCEPT' => 'application/json',
-        'CONTENT_TYPE' => 'application/json'
+        'HTTP_ACCEPT' => 'application/json'
       }
-      post '/api/v1/users', params: { { name: 'John Snow' } },
+      post '/api/v1/users', params: { user: { name: 'John Snow' } },
            headers: headers
 
       expect(response).to have_http_status(:created)
@@ -43,14 +42,14 @@ RSpec.describe 'User endpoints tests', type: :request do
 
     it 'Fails for an already taken user name' do
       headers = {
-        'HTTP_ACCEPT' => 'application/json',
-        'CONTENT_TYPE' => 'application/json'
+        'HTTP_ACCEPT' => 'application/json'
       }
-      post '/api/v1/users', params: { name: user.name }, headers: headers
+      post '/api/v1/users', params: { user: { name: user.name } },
+           headers: headers
 
       expect(response).to have_http_status(:conflict)
       expect(response.body).to include_json(
-        error: 'Usename already taken'
+        error: 'Name has already been taken'
       )
     end
   end
