@@ -6,11 +6,18 @@ class Reservation < ApplicationRecord
   validates :city, presence: true
 
   def as_json(_options = {})
+    service = Service.find(service_id)
+
     {
-      id: id,
-      user_id: user_id,
-      service_id: service_id,
-      date: date,
+      reservation_id: id,
+      service_name: service.name,
+      service_description: service.description,
+      image_url: service.image_url,
+      date: {
+        day: date.day,
+        month: date.month,
+        year: date.year
+      },
       city: city
     }
   end

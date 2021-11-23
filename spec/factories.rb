@@ -14,6 +14,6 @@ FactoryBot.define do
     user_id { 1 }
     service_id { 1 }
     city { 'Manila' }
-    date { Date.tomorrow }
+    date { Date.current }
   end
 end

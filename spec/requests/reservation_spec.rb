@@ -5,25 +5,28 @@ RSpec.describe 'Reservations-related endpoints tests', type: :request do
   let!(:user2) { create(:user, name: 'User 2') }
   let!(:service1) { create(:service, name: 'Test service 1') }
   let!(:service2) { create(:service, name: 'Test service 2') }
-  let(:reservation11) do
+  let!(:reservation11) do
     create(:reservation, user_id: user1.id, service_id: service1.id)
   end
-  let(:reservation12) do
+  let!(:reservation12) do
     create(:reservation, user_id: user1.id, service_id: service2.id)
   end
 
   describe "List a given user's reservations" do
-    xit "Returns the list of the user's reservations" do
+    it "Returns the list of the user's reservations" do
       get "/api/v1/users/#{user1.id}/reservations"
 
       reservations = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:ok)
       expect(reservations['user_id']).to eq(user1.id)
       expect(reservations['reservations'].length).to eq(2)
     end
 
-    xit 'Reservations data has the correct info' do
+    it 'Reservations data has the correct info' do
       get "/api/v1/users/#{user1.id}/reservations"
 
+      expect(response).to have_http_status(:ok)
       expect_json_types(
         'reservations.0',
         reservation_id: :int,
@@ -126,15 +129,15 @@ RSpec.describe 'Reservations-related endpoints tests', type: :request do
   end
 
   describe 'Cancel a reservation' do
-    xit 'Cancels a valid reservation' do
+    it 'Cancels a valid reservation' do
       delete "/api/v1/reservations/#{reservation11.id}"
 
       expect(response).to have_http_status(:accepted)
       expect_json(message: 'Your reservation has been canceled')
     end
 
-    xit 'Fails to cancel an invalid reservation' do
-      delete "/api/v1/reservations/#{reservation11.id + 1}"
+    it 'Fails to cancel an invalid reservation' do
+      delete "/api/v1/reservations/#{reservation12.id + 1}"
 
       expect(response).to have_http_status(:not_found)
       expect_json_types('errors', :array)
