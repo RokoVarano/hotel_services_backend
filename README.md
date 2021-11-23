@@ -83,7 +83,7 @@ Body (example):
 ```
 
 ## Delete a given service
-### Endpoint: DELETE /api/v1/service/:id
+### Endpoint: DELETE /api/v1/services/:id
 #### Response
 Success:
 Code: 202
@@ -106,7 +106,7 @@ Body (example):
 ```
 
 ## List a given user's reservations
-### Endpoint: GET api/v1/user/:id/reservations
+### Endpoint: GET api/v1/users/:id/reservations
 #### Response
 Successful:
 Code: 200
@@ -133,7 +133,7 @@ Body (example):
 ```
 
 ## Book a given service
-### Endpoint: POST /api/v1/user/:user_id/services/:service_id/reservation
+### Endpoint: POST /api/v1/users/:user_id/services/:service_id/reservation
 #### Request
 Header:
 ```json
@@ -172,7 +172,7 @@ Code: 500
 ```
 
 ## Cancel a reservation
-### Endpoint DELETE api/v1/reservation/:id
+### Endpoint DELETE api/v1/reservations/:id
 #### Response
 Successful:
 Code: 202
@@ -244,11 +244,11 @@ Body:
 ```
 
 Failed:
-Code: 500
+Code: 401
 Body:
 ```json
 {
-    "error": "User doesn't exit"
+    "error": "User doesn't exist"
 }
 ```
 **The error message will return the error cause.**
