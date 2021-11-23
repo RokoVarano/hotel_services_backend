@@ -244,11 +244,11 @@ Body:
 ```
 
 Failed:
-Code: 500
+Code: 401
 Body:
 ```json
 {
-    "error": "User doesn't exit"
+    "error": "User doesn't exist"
 }
 ```
 **The error message will return the error cause.**
