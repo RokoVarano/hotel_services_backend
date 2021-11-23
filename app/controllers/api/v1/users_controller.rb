@@ -3,12 +3,12 @@ class Api::V1::UsersController < ApplicationController
     user = User.find_by(name: params[:name])
     if user
       render json: {
-               message: "User logged in",
-               user_id: user.id
-             }.to_json,
+        message: 'User logged in',
+        user_id: user.id
+      }.to_json,
              status: :accepted
     else
-      render json: { error: "User doesn't exist" }.to_json,
+      render json: { errors: ["User doesn't exist"] }.to_json,
              status: :unauthorized
     end
   end
@@ -17,14 +17,14 @@ class Api::V1::UsersController < ApplicationController
     new_user = User.new(new_user_params)
     if new_user.save
       render json: {
-               message: "User was successfully created",
-               user_id: new_user.id
-             }.to_json,
+        message: 'User was successfully created',
+        user_id: new_user.id
+      }.to_json,
              status: :created
     else
       render json: {
-               error: new_user.errors.full_messages[0]
-             }.to_json,
+        errors: new_user.errors.full_messages
+      }.to_json,
              status: :conflict
     end
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User endpoints tests', type: :request do
+RSpec.describe 'User-related endpoints tests', type: :request do
   let!(:user) { create(:user) }
 
   describe 'User Log In' do
@@ -17,9 +17,7 @@ RSpec.describe 'User endpoints tests', type: :request do
       get '/api/v1/users?name=john'
 
       expect(response).to have_http_status(:unauthorized)
-      expect(response.body).to include_json(
-        error: "User doesn't exist"
-      )
+      expect_json_types('errors', :array)
     end
   end
 
@@ -31,7 +29,7 @@ RSpec.describe 'User endpoints tests', type: :request do
         'HTTP_ACCEPT' => 'application/json'
       }
       post '/api/v1/users', params: { user: { name: 'John Snow' } },
-           headers: headers
+                            headers: headers
 
       expect(response).to have_http_status(:created)
       expect(response.body).to include_json(
@@ -45,12 +43,10 @@ RSpec.describe 'User endpoints tests', type: :request do
         'HTTP_ACCEPT' => 'application/json'
       }
       post '/api/v1/users', params: { user: { name: user.name } },
-           headers: headers
+                            headers: headers
 
       expect(response).to have_http_status(:conflict)
-      expect(response.body).to include_json(
-        error: 'Name has already been taken'
-      )
+      expect_json_types('errors', :array)
     end
   end
 end
