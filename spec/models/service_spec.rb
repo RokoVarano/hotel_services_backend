@@ -1,10 +1,5 @@
 require 'rails_helper'
 
-# RSpec.describe Service, type: :model do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
-
-
 RSpec.describe Service, :type => :model do
   subject { 
          described_class.new(name: 'Sample 1 service', 
@@ -14,45 +9,39 @@ RSpec.describe Service, :type => :model do
          )  
   }
 
-  # let!(:service1) { create(:service) }
-
-  describe "Validations" do
-    it "is valid with valid attributes" do
+  describe 'Validations' do
+    it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
 
-    it "is not valid without a name" do
+    it 'is not valid without a name' do
       subject.name = nil
       expect(subject).to_not be_valid
     end
 
-    it "is not valid with a name of 'abc'" do
+    it 'is not valid with a name of "abc"' do
       subject.name = 'abc'
       expect(subject).to_not be_valid
     end
 
-    it "is not valid without a description" do
+    it 'is not valid without a description' do
       subject.description = nil
       expect(subject).to_not be_valid
     end
 
-    it "is not valid without a price" do
+    it 'is not valid without a price' do
       subject.price = nil
       expect(subject).to_not be_valid
     end
 
-    it "is not valid without an image url" do
+    it 'is not valid without an image url' do
       subject.image_url = nil
       expect(subject).to_not be_valid
     end
 
-    it "is not valid with a wrongly formatted url" do
+    it 'is not valid with a wrongly formatted url' do
       subject.image_url = 'amazing sljsjljs'
       expect(subject).to_not be_valid
     end
-  end
-
-  describe "Associations" do
-    
   end
 end
