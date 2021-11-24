@@ -14,6 +14,8 @@ RSpec.describe Service, :type => :model do
          )  
   }
 
+  # let!(:service1) { create(:service) }
+
   describe "Validations" do
     it "is valid with valid attributes" do
       expect(subject).to be_valid
