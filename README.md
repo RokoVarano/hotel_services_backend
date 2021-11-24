@@ -14,6 +14,21 @@ Additional description about the project and its features.
 - React
 - Redux
 
+# Getting started
+**You need to have your Postgresql installed and configured to use this project. You also may have to add credentials to <project_root_folder>/config/database.yml**
+
+To get the server up and running in your system, run the following commands from the project's root folder:
+
+```bash
+$ bundle install
+$ bundle exec rails db:create db:migrate
+$ rails s
+```
+
+If you want your database to be populated with example data, run (after `bundle exec rails db:create`)
+```bash
+bundle exec rails db:setup
+```
 
 # API Documentation
 
@@ -164,7 +179,10 @@ Code: 201
 ```
 
 Failure:
-Code: 500
+Codes:
+- 400 for an invalid date given in the request's body
+- 404 if either the user_id or service_id do not belong to valid resources
+- 500 if we messed up
 ```json
 {
     "errors": ["Reservation creation has failed"]
@@ -183,7 +201,9 @@ Body (example):
 }
 ```
 Failure:
-Code: 500
+Code:
+- 404 if the id url parameter doesn't belong to a valid reservation
+- 500 if we messed up
 Body (example):
 ```json
 {
@@ -221,7 +241,9 @@ Body (example):
 ```
 
 Failed:
-Code: 500
+Code:
+- 409 if the username is already taken
+- 500 if we messed up
 Body (example):
 ```json
 {
@@ -244,7 +266,9 @@ Body:
 ```
 
 Failed:
-Code: 401
+Code:
+- 401 if the name given as an url parameter does not belong to a valid user
+- 500 if we messed up
 Body:
 ```json
 {
