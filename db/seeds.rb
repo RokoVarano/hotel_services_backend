@@ -7,12 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 10.times { |n| User.create(name: "User#{n}") }
 
-[ 'Pool time', 'Bedroom', 'Conference Room', 'Restaurant', 'Gym' ].map do |name|
+[ 'Pool time', 'Bedroom', 'Conference Room', 'Restaurant', 'Gym' ].each_with_index.map do |name, index|
   Service.create(
     name: name,
     description: "Best in class #{name} service, only at Hotels Hotels",
     price: 5000,
-    image_url: 'https://picsum.photos/200/300'
+    image_url: "https://picsum.photos/id/#{index + 1}00/500"
   )
 end
 
