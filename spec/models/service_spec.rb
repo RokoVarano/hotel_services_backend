@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Service, :type => :model do
-  subject { 
+RSpec.describe Service, type: :model do
+  subject {
          described_class.new(name: 'Sample 1 service', 
                              description: 'Sample 1 Service description',
                              price: 4,
