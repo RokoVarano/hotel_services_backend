@@ -1,18 +1,15 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # Hotel Booking app API and DB management
+### Front-end access on:
+    https://github.com/AdedayoOpeyemi/hotel_services_frontend
 
 > API backend of the project
 
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
 
 ## Built With
 
 - Ruby on Rails
-- React
-- Redux
 
 # Getting started
 **You need to have your Postgresql installed and configured to use this project. You also may have to add credentials to <project_root_folder>/config/database.yml**
