@@ -45,6 +45,7 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   private
+
   def new_reservation_params
     params.require(:reservation).permit(:city, date: %i[day month year])
   end
