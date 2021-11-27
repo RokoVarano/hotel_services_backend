@@ -46,9 +46,12 @@ class Api::V1::ReservationsController < ApplicationController
 
   private
 
+  def new_reservation_params
+    params.require(:reservation).permit(:city, date: %i[day month year])
+  end
+
   def date_from_params
-    date_hash = params.require(:reservation)
-      .permit(date: %i[day month year])['date']
+    date_hash = new_reservation_params['date']
     day = date_hash['day']
     month = date_hash['month']
     year = date_hash['year']
@@ -60,6 +63,6 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def city_param
-    params.require(:reservation).permit(:city)
+    new_reservation_params['city']
   end
 end
