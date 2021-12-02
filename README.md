@@ -1,18 +1,32 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # Hotel Booking app API and DB management
+### Front-end access on:
+    https://github.com/AdedayoOpeyemi/hotel_services_frontend
 
 > API backend of the project
 
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
+ - [Live Demo](https://hotel-services-2021.netlify.app)
 
 ## Built With
 
 - Ruby on Rails
-- React
-- Redux
+
+# Getting started
+**You need to have your Postgresql installed and configured to use this project. You also may have to add credentials to <project_root_folder>/config/database.yml**
+
+To get the server up and running in your system, run the following commands from the project's root folder:
+
+```bash
+$ bundle install
+$ bundle exec rails db:create db:migrate
+$ rails s
+```
+
+If you want your database to be populated with example data, run (after `bundle exec rails db:create`)
+```bash
+bundle exec rails db:setup
+```
 
 # API Documentation
 
@@ -30,17 +44,15 @@ Body (example):
         {
             "id": 1,
             "name": "pool time",
-            "description": "bring your own towel"
-            "time": 1.0,
-            "price": 10.0,
-            "image_url":  "https://picsum.photos/200/300",
-            "city": "San Francisco"
+            "description": "bring your own towel",
+            "price": 1000,
+            "image_url":  "https://picsum.photos/200/300"
         }
     ]
 }
 ```
 
-**Prices are in USD**
+**Prices are in USD cents**
 
 ## Create a new service
 ### Endpoint: POST /api/v1/services
@@ -56,14 +68,12 @@ Body (example):
 ```json
 {
     "name": "pool time",
-    "description": "bring your own towell",
-    "time": 1.0,
-    "price": 10.0,
-    "image_url": "https://picsum.photos/200/300",
-    "city": "Los Angeles"
+    "description": "bring your own towel",
+    "price": 1000,
+    "image_url": "https://picsum.photos/200/300"
 }
 ```
-**Prices are in USD**
+**Prices are in USD cents**
 
 #### Response
 Successful:
@@ -81,12 +91,12 @@ Code: 500
 Body (example):
 ```json
 {
-    "message": "Service creation has failed"
+    "errors": ["Service creation has failed"]
 }
 ```
 
 ## Delete a given service
-### Endpoint: DELETE /api/v1/service/:id
+### Endpoint: DELETE /api/v1/services/:id
 #### Response
 Success:
 Code: 202
@@ -104,12 +114,12 @@ Body (example):
 
 ```json
 {
-    "message": "Service removal has failed"
+    "errors": ["Service removal has failed"]
 }
 ```
 
 ## List a given user's reservations
-### Endpoint: GET api/v1/user/:id/reservations
+### Endpoint: GET api/v1/users/:id/reservations
 #### Response
 Successful:
 Code: 200
@@ -120,46 +130,23 @@ Body (example):
     "user_id": 1,
     "reservations": [
         {
-            "id": 1,
+            "reservation_id": 1,
             "date": {
                 "day": 14,
                 "month": 4,
-                "year": 2021,
-                "start": "13:00",
-                "end": "14:00"
+                "year": 2021
             }
-            "service_id": 1,
-        }
-    ]
-}
-```
-
-## Get current reservations for a given service by service name
-### Endpoint GET /api/v1/service/:name/reservations
-#### Response
-Successful:
-Code: 200
-Body (example):
-
-```json
-{
-    "reservations": [
-        {
-            "date": {
-                "day": 14,
-                "month": 4,
-                "year": 2021,
-                "start": "13:00",
-                "end": "14:00"
-            },
-            "service_id": 1
+            "service_name": "Pool time",
+            "service_description": "Bring some of your friends",
+            "image_url": "https://picsum.photos/200/300",
+            "city": "Los Angeles"
         }
     ]
 }
 ```
 
 ## Book a given service
-### Endpoint: POST /api/v1/user/:id/reservations
+### Endpoint: POST /api/v1/users/:user_id/services/:service_id/reservation
 #### Request
 Header:
 ```json
@@ -171,14 +158,12 @@ Header:
 Body (example):
 ```json
 {
-    "service_id": 1,
     "date": {
         "day": 14,
         "month": 4,
-        "year": 2021,
-        "start": "13:00",
-        "end": "14:00"
-    }
+        "year": 2021
+    },
+    "city": "Chicago"
 }
 ```
 
@@ -192,15 +177,18 @@ Code: 201
 ```
 
 Failure:
-Code: 500
+Codes:
+- 400 for an invalid date given in the request's body
+- 404 if either the user_id or service_id do not belong to valid resources
+- 500 if we messed up
 ```json
 {
-    "message": "Reservation creation has failed"
+    "errors": ["Reservation creation has failed"]
 }
 ```
 
 ## Cancel a reservation
-### Endpoint DELETE api/reservation/:id
+### Endpoint DELETE api/v1/reservations/:id
 #### Response
 Successful:
 Code: 202
@@ -211,7 +199,9 @@ Body (example):
 }
 ```
 Failure:
-Code: 500
+Code:
+- 404 if the id url parameter doesn't belong to a valid reservation
+- 500 if we messed up
 Body (example):
 ```json
 {
@@ -243,16 +233,19 @@ Code: 201
 Body (example):
 ```json
 {
-    "message": "User was successfully created"
+    "message": "User was successfully created",
+    "user_id": 42
 }
 ```
 
 Failed:
-Code: 500
+Code:
+- 409 if the username is already taken
+- 500 if we messed up
 Body (example):
 ```json
 {
-    "error": "Username already taken"
+    "errors": ["Username already taken"]
 }
 ```
 **The error message will return the error cause.**
@@ -271,43 +264,44 @@ Body:
 ```
 
 Failed:
-Code: 500
+Code:
+- 401 if the name given as an url parameter does not belong to a valid user
+- 500 if we messed up
 Body:
 ```json
 {
-    "error": "User doesn't exit"
+    "errors": ["User doesn't exist"]
 }
 ```
 **The error message will return the error cause.**
 
-
-## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-Coming son
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
+### Kanban board
+- [Kanban board](https://github.com/RokoVarano/hotel_services_backend/projects/1)
+- [Kanban board Screenshoot](https://user-images.githubusercontent.com/57110317/142681121-8060c7cb-3270-4c90-9610-4c150bdc3c84.png)
+- In this project we worked in a group of 4 members:
 
 ## Authors
 
-👤 **Author1**
+👤 **Opeyemi Oyelesi**
+- GitHub: [@AdedayoOpeyemi](https://github.com/AdedayoOpeyemi)
+- Twitter: [@Oyelesiopy](https://twitter.com/Oyelesiopy)
+- LinkedIn: [Opeyemi Oyelesi](https://linkedin.com/in/opeyemioyelesi)
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+👤 **Lucas Ferrari Soto**
+
+- GitHub: [@notlfish](https://github.com/notlfish)
+- Twitter: [@LucasFerrariSo1](https://twitter.com/LucasFerrariSo1)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/lucas-mauricio-ferrari-soto-472a3515a/)
+
+👤 **Rodrigo Ibaceta**
+- GitHub: [@RokoVarano](https://github.com/RokoVarano)
+- Twitter: [@RodrigoIbacet11](https://twitter.com/RodrigoIbacet11)
+- LinkedIn: [rodrigo-ibaceta](https://www.linkedin.com/in/rodrigo-ibaceta/)
+
+👤 **Andres Felipe Castañeda Ramos**
+- Github: [@afcastaneda223](https://github.com/afcastaneda223)
+- Twitter: [@afcastaneda](https://twitter.com/afcastaneda)
+- Linkedin: [Andres Felipe Castañeda](https://www.linkedin.com/in/andcast)
 
 ## 🤝 Contributing
 
