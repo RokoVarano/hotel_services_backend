@@ -6,6 +6,7 @@
 
 > API backend of the project
 
+ - [Live Demo](https://hotel-services-2021.netlify.app)
 
 ## Built With
 
